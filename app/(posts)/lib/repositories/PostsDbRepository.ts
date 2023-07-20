@@ -1,5 +1,5 @@
 import {CrudRepository} from "@/lib/repositories/CrudRepository";
-import {Post} from "@/app/posts/lib/models/Post";
+import {Post} from "@/app/(posts)/lib/models/Post";
 import prisma from "@/lib/prisma";
 
 export interface PostsDbRepository extends CrudRepository<Post> {

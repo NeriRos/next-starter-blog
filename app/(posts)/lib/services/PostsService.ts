@@ -1,5 +1,5 @@
-import {Post} from "@/app/posts/lib/models/Post";
-import {PostsDbRepository} from "@/app/posts/lib/repositories/PostsDbRepository";
+import {Post} from "@/app/(posts)/lib/models/Post";
+import {PostsDbRepository} from "@/app/(posts)/lib/repositories/PostsDbRepository";
 
 export interface PostsService {
     getAllPosts(): Promise<Post[]>;
