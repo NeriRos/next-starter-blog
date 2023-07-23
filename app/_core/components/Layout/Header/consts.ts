@@ -4,7 +4,7 @@ export const LINKS = [
         label: 'Home'
     },
     {
-        href: '/users',
-        label: 'Users Management'
+        href: '/posts',
+        label: 'Posts feed'
     }
 ]
