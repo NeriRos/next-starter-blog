@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import {TEXTS} from "@/app/(marketing)/(home)/consts"
+import {TEXTS} from "@/app/(marketing)/consts"
 import {LOGIN_REDIRECT_URL} from "@/app/(authentication)/components/AuthForm/consts";
 
 export default function Page() {
