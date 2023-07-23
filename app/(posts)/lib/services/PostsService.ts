@@ -1,16 +1,17 @@
+import "server-only";
 import {Post} from "@/app/(posts)/lib/models/Post";
 import {PostsDbRepository} from "@/app/(posts)/lib/repositories/PostsDbRepository";
 
 export interface PostsService {
     getAllPosts(): Promise<Post[]>;
 
-    getPost(id: string): Promise<Post>;
+    getPost(id: number): Promise<Post>;
 
     createPost(post: Post): Promise<Post>;
 
-    updatePost(id: string, post: Post): Promise<Post>;
+    updatePost(id: number, post: Post): Promise<Post>;
 
-    deletePost(id: string): Promise<void>;
+    deletePost(id: number): Promise<void>;
 }
 
 export type PostsServiceDependencies = {
@@ -24,7 +25,7 @@ export const createPostsService = (dependencies: PostsServiceDependencies): Post
         return posts.map(post => Post.fromJson(post));
     }
 
-    const getPost = async (id: string): Promise<Post> => {
+    const getPost = async (id: number): Promise<Post> => {
         const post = await dependencies.dbRepository.get(id);
 
         return Post.fromJson(post);
@@ -36,13 +37,13 @@ export const createPostsService = (dependencies: PostsServiceDependencies): Post
         return Post.fromJson(createdPost);
     }
 
-    const updatePost = async (id: string, post: Post): Promise<Post> => {
+    const updatePost = async (id: number, post: Post): Promise<Post> => {
         const updatedPost = await dependencies.dbRepository.update(id, post.toJson());
 
         return Post.fromJson(updatedPost);
     }
 
-    const deletePost = async (id: string): Promise<void> => {
+    const deletePost = async (id: number): Promise<void> => {
         await dependencies.dbRepository.deleteItem(id);
     }
 

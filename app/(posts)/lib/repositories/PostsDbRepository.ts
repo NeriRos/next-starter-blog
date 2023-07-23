@@ -1,8 +1,9 @@
 import "server-only";
 
 import {CrudRepository} from "@/lib/repositories/CrudRepository";
-import {IPost, Post} from "@/app/(posts)/lib/models/Post";
+import {Post} from "@/app/(posts)/lib/models/Post";
 import prisma from "@/lib/prisma";
+import {IPost} from "@/app/(posts)/lib/interfaces/IPost";
 
 export interface PostsDbRepository extends CrudRepository<Post> {
 

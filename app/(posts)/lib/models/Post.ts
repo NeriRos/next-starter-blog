@@ -1,12 +1,5 @@
 import "server-only";
 
-export interface IPost {
-    title: string;
-    content: string;
-    authorId: number;
-    id?: number;
-}
-
 export class Post implements IPost {
     constructor(
         public title: string,
