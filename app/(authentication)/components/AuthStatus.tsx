@@ -1,4 +1,3 @@
-"use server"
 import { getServerSession } from "next-auth"
 import { TEXTS } from "@/app/(authentication)/components/consts"
 

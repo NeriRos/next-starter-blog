@@ -1,4 +1,5 @@
 import "server-only";
+import {IPost} from "@/app/(posts)/lib/interfaces/IPost";
 
 export class Post implements IPost {
     constructor(

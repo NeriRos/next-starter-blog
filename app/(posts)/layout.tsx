@@ -2,12 +2,11 @@ import "@/styles/globals.css"
 import {Metadata} from "next"
 import {Inter} from "next/font/google"
 import {Toaster} from "react-hot-toast"
-import React, {Suspense} from "react"
-import AuthStatus from "@/app/(authentication)/components/AuthStatus"
+import React from "react"
 import {Providers} from "@/app/Providers";
 import {METADATA} from "@/app/(posts)/consts";
-import {Header} from "@/components/Layout/Header";
 import Styles from "@/components/Layout/Layout.module.css";
+import {Header} from "@/components/Layout";
 
 const inter = Inter({
     variable: "--font-inter",
@@ -38,10 +37,10 @@ export default async function RootLayout({
               suppressHydrationWarning={true}>
         <Providers>
             <Toaster/>
-            <Header/>
-            <Suspense fallback="Loading...">
-                <AuthStatus/>
-            </Suspense>
+            <Header />
+            {/*<Suspense fallback="Loading...">*/}
+            {/*    <AuthStatus/>*/}
+            {/*</Suspense>*/}
             <main className={Styles.main}>
                 {children}
             </main>

@@ -4,11 +4,10 @@ import Link from "next/link";
 import clsx from "clsx";
 import {LINKS} from "@/components/Layout/Header/consts";
 
-export const Header = (props: { className?: string }) => {
+export const Header = () => {
     const pathname = "test"
-    console.log(props)
 
-    return <div className={clsx([Styles.header, props.className])}>
+    return <div className={Styles.header}>
         <nav className={Styles.menu}>
             {LINKS.map((link) =>
                 <Link className={clsx([Styles.link, pathname === link.href && Styles.active])} href={link.href}

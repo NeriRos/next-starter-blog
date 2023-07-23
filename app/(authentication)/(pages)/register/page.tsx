@@ -1,5 +1,5 @@
 import Image from "next/image"
-import AuthForm from "@/app/(authentication)/components/AuthForm/AuthForm"
+import {AuthForm} from "@/app/(authentication)/components/AuthForm"
 import Link from "next/link"
 
 export default function RegisterPage() {
@@ -23,7 +23,7 @@ export default function RegisterPage() {
                         Create an account with your email and password
                     </p>
                 </div>
-                <AuthForm type="register" />
+                <AuthForm type="register"/>
             </div>
         </div>
     )
