@@ -1,5 +1,7 @@
+import "server-only";
+
 import {CrudRepository} from "@/lib/repositories/CrudRepository";
-import {Post} from "@/app/(posts)/lib/models/Post";
+import {IPost, Post} from "@/app/(posts)/lib/models/Post";
 import prisma from "@/lib/prisma";
 
 export interface PostsDbRepository extends CrudRepository<Post> {
@@ -8,29 +10,37 @@ export interface PostsDbRepository extends CrudRepository<Post> {
 
 export const createPostsDbRepository = (): PostsDbRepository => {
     const getAll = async (): Promise<Post[]> => {
-        return await prisma.post.findMany();
+        const postsResult = await prisma.post.findMany();
+
+        return postsResult.map(Post.fromJson)
     }
 
-    const get = async (id: string): Promise<Post> => {
-        return await prisma.post.findUnique({
+    const get = async (id: number): Promise<Post> => {
+        const postResult = await prisma.post.findUnique({
             where: {id}
         });
+
+        return Post.fromJson(postResult);
     }
 
-    const create = async (item: Post): Promise<Post> => {
-        return await prisma.post.create({
+    const create = async (item: IPost): Promise<Post> => {
+        const postResult = await prisma.post.create({
             data: item
         });
+
+        return Post.fromJson(postResult);
     }
 
-    const update = async (id: string, item: Post): Promise<Post> => {
-        return await prisma.post.update({
+    const update = async (id: number, item: IPost): Promise<Post> => {
+        const postResult = await prisma.post.update({
             where: {id},
             data: item
         });
+
+        return Post.fromJson(postResult);
     }
 
-    const deleteItem = async (id: string): Promise<void> => {
+    const deleteItem = async (id: number): Promise<void> => {
         await prisma.post.delete({
             where: {id}
         });
