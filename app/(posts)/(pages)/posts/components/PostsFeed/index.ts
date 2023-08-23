@@ -1,1 +1,1 @@
-export * from './PostsFeed';
+export * from './PostsFeedContainer';
