@@ -1,6 +1,7 @@
 import {Metadata} from "next"
 import React from "react"
 import {METADATA} from "@/app/(posts)/consts";
+import {Header} from "@/components/Layout";
 
 export const metadata: Metadata = {
     title: METADATA.title,
@@ -18,5 +19,8 @@ export default async function Layout({
                                      }: {
     children: React.ReactNode;
 }) {
-    return <>{children}</>
+    return <>
+        <Header />
+        {children}
+    </>
 }
