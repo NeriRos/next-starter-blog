@@ -1,7 +1,9 @@
-import { compare, hash } from "bcrypt"
-import { User as NextUser } from "next-auth"
+import "server-only";
+import {compare, hash} from "bcrypt"
+import {User as NextUser} from "next-auth"
+import {IUser} from "@/app/(authentication)/lib/interfaces/IUser";
 
-export class User implements NextUser {
+export class User implements NextUser, IUser {
 
     constructor(
         public id: string,

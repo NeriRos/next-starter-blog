@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
-import { TEXTS } from "@/app/(marketing)/(home)/consts"
+import {TEXTS} from "@/app/(marketing)/consts"
+import {LOGIN_REDIRECT_URL} from "@/app/(authentication)/components/AuthForm/consts";
 
 export default function Page() {
     return (
@@ -50,7 +51,7 @@ export default function Page() {
                 </div>
                 <div className="flex space-x-3">
                     <Link
-                        href="/feed"
+                        href={LOGIN_REDIRECT_URL}
                         prefetch={false}
                         className="text-stone-400 underline hover:text-stone-200 transition-all"
                     >

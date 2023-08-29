@@ -1,7 +1,12 @@
 import { LoadingDots } from "@/components/LoadingDots"
 import { ReactNode } from "react"
 
-const Button = ({ loading, children }: { loading?: boolean, children: ReactNode | ReactNode[] }) => {
+type ButtonProps = {
+    loading?: boolean
+    children: ReactNode | ReactNode[]
+}
+
+export const Button = ({ loading, children }: ButtonProps) => {
     return (<button
         disabled={loading}
         className={`${
@@ -13,5 +18,3 @@ const Button = ({ loading, children }: { loading?: boolean, children: ReactNode 
         {loading ? (<LoadingDots color="#808080" />) : children}
     </button>)
 }
-
-export default Button
