@@ -1,18 +1,20 @@
-import React, {Suspense} from "react";
-import {TEXTS} from "@/app/(posts)/(pages)/posts/components/PostsFeed/texts";
+import React from "react";
 import {Post} from "@/app/(posts)/lib/models/Post";
-import prisma from "@/lib/prisma";
 import {PostsFeed as Client} from "@/app/(posts)/(pages)/posts/components/PostsFeed/PostsFeed";
+import {createPostsService} from "@/app/(posts)/lib/services/PostsService";
+import {createPostsDbRepository} from "@/app/(posts)/lib/repositories/PostsDbRepository";
 
 export const PostsFeed = async () => {
-    const posts = await prisma.post.findMany();
-    const postObjects = posts.map((post) => Post.fromJson(post));
+    const service = createPostsService({
+        dbRepository: createPostsDbRepository()
+    })
+
+    const posts = await service.getAllPosts()
+    const postObjects = posts.map((post) => post.toJson());
 
     return (
         <div className="w-full flex flex-col gap-4 justify-center items-center">
-            <Suspense fallback={<span>{TEXTS.loadingText}</span>}>
-                <Client posts={postObjects}/>
-            </Suspense>
+            <Client posts={postObjects}/>
         </div>
     )
 }

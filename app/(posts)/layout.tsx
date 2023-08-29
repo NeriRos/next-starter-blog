@@ -2,6 +2,9 @@ import {Metadata} from "next"
 import React from "react"
 import {METADATA} from "@/app/(posts)/consts";
 import {Header} from "@/components/Layout";
+import {getServerSession} from "next-auth";
+import {FloatingQuickActions} from "@/app/(posts)/components/FloatingQuickActions/FloatingQuickActions";
+import {CreatePostButton} from "@/app/(posts)/components/CreatePostButton";
 
 export const metadata: Metadata = {
     title: METADATA.title,
@@ -19,8 +22,13 @@ export default async function Layout({
                                      }: {
     children: React.ReactNode;
 }) {
+    const session = await getServerSession()
+
     return <>
-        <Header />
+        <Header/>
         {children}
+        {session ? <FloatingQuickActions>
+            <CreatePostButton/>
+        </FloatingQuickActions> : null}
     </>
 }

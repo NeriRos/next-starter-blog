@@ -1,6 +1,6 @@
 import {createPostsService} from "@/app/(posts)/lib/services/PostsService";
 import {createPostsDbRepository} from "@/app/(posts)/lib/repositories/PostsDbRepository";
-import {NextResponse} from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 
 const postsService = createPostsService({
     dbRepository: createPostsDbRepository()
