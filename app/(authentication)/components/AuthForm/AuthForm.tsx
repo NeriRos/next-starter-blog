@@ -94,7 +94,7 @@ export const AuthForm = ({ type }: { type: "login" | "register" }) => {
             {type === "login" ? (
                 <p className="text-center text-sm text-gray-600">
                     {TEXTS.noAccount}
-                    <Link href={REGISTER_URL} className="font-semibold text-gray-800">
+                    <Link href={REGISTER_URL} className="font-semibold text-gray-800 pl-1">
                         {TEXTS.signUp}
                     </Link>{" "}
                     {TEXTS.forFree}
@@ -102,7 +102,7 @@ export const AuthForm = ({ type }: { type: "login" | "register" }) => {
             ) : (
                 <p className="text-center text-sm text-gray-600">
                     {TEXTS.alreadyHaveAccount}
-                    <Link href={LOGIN_URL} className="font-semibold text-gray-800">
+                    <Link href={LOGIN_URL} className="font-semibold text-gray-800 pl-1">
                         {TEXTS.signIn}
                     </Link>{" "}
                     {TEXTS.instead}
