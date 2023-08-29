@@ -3,7 +3,7 @@ import React from "react"
 import {METADATA} from "@/app/(posts)/consts";
 import {Header} from "@/components/Layout";
 import {getServerSession} from "next-auth";
-import {FloatingQuickActions} from "@/app/(posts)/components/FloatingQuickActions/FloatingQuickActions";
+import {FloatingQuickActions} from "@/app/(posts)/components/FloatingQuickActions";
 import {CreatePostButton} from "@/app/(posts)/components/CreatePostButton";
 
 export const metadata: Metadata = {
