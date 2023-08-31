@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactNode, useEffect } from "react"
+import { ReactNode } from "react"
 import { CgClose } from "react-icons/cg"
 
 export const Modal = (props: {

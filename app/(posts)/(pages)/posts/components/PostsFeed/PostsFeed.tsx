@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect } from "react"
+import React from "react"
 import { PostsSearch } from "@/app/(posts)/(pages)/posts/components/PostsSearch/PostsSearch"
 import { Post } from "@/app/(posts)/lib/models/Post"
 import { PostFeedItem } from "@/app/(posts)/(pages)/posts/components/PostsFeed/PostFeedItem"
