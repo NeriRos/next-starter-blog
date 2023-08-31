@@ -19,7 +19,7 @@ export const Providers = ({ children, session }: ProvidersProps) => {
     return (
         <SessionProvider session={session}>
             <QueryClientProvider client={queryClient}>
-                <UserProvider>{children}</UserProvider>
+                {children}
             </QueryClientProvider>
         </SessionProvider>
     )
