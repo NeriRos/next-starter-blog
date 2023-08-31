@@ -23,7 +23,7 @@ export default function RegisterPage() {
                         Create an account with your email and password
                     </p>
                 </div>
-                <AuthForm type="register"/>
+                <AuthForm type="register" />
             </div>
         </div>
     )
