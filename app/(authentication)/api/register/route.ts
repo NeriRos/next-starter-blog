@@ -10,7 +10,7 @@ const authenticationService = createAuthenticationService({
 
 export async function POST(req: Request) {
     const registerData: RegisterArgs = await req.json()
-    console.log(registerData)
+
     try {
         const user = await authenticationService.register(registerData)
 
