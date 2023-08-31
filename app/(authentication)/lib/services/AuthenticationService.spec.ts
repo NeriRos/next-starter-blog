@@ -1,6 +1,9 @@
-import {AuthenticationService, createAuthenticationService} from "./AuthenticationService"
-import {UsersDbRepository} from "@/app/(authentication)/lib/repositories/UsersDbRepository"
-import {User} from "@/app/(authentication)/lib/models/User"
+import {
+    AuthenticationService,
+    createAuthenticationService,
+} from "./AuthenticationService"
+import { UsersDbRepository } from "@/app/(authentication)/lib/repositories/UsersDbRepository"
+import { User } from "@/app/(authentication)/lib/models/User"
 
 describe("AuthenticationService", () => {
     const userPassword = "password"
@@ -17,7 +20,11 @@ describe("AuthenticationService", () => {
             dbRepository: usersDbRepository,
         })
 
-        service.register({name: user.name, email: user.email, password: userPassword})
+        service.register({
+            name: user.name,
+            email: user.email,
+            password: userPassword,
+        })
         expect(usersDbRepository.createUser).toHaveBeenCalled()
     })
 })

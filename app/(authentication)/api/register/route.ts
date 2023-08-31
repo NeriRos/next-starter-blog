@@ -17,7 +17,10 @@ export async function POST(req: Request) {
         return NextResponse.json(user)
     } catch (e) {
         if (e instanceof UserAlreadyExists) {
-            return NextResponse.json({ error: "User already exists" }, { status: 400 })
+            return NextResponse.json(
+                { error: "User already exists" },
+                { status: 400 }
+            )
         }
 
         return NextResponse.json({ error: "Unhandled error" }, { status: 500 })

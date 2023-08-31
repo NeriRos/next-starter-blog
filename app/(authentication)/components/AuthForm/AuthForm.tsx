@@ -1,13 +1,17 @@
 "use client"
 
-import {FormEvent} from "react"
+import { FormEvent } from "react"
 import Link from "next/link"
-import {Button} from "@/components/Button"
-import {useAuthForm} from "@/app/(authentication)/components/AuthForm/useAuthForm"
-import {LOGIN_URL, REGISTER_URL, TEXTS} from "@/app/(authentication)/components/AuthForm/consts"
+import { Button } from "@/components/Button"
+import { useAuthForm } from "@/app/(authentication)/components/AuthForm/useAuthForm"
+import {
+    LOGIN_URL,
+    REGISTER_URL,
+    TEXTS,
+} from "@/app/(authentication)/components/AuthForm/consts"
 
-export const AuthForm = ({type}: { type: "login" | "register" }) => {
-    const {loading, signUp, signIn, errorHandler} = useAuthForm()
+export const AuthForm = ({ type }: { type: "login" | "register" }) => {
+    const { loading, signUp, signIn, errorHandler } = useAuthForm()
 
     const submitForm = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -35,14 +39,12 @@ export const AuthForm = ({type}: { type: "login" | "register" }) => {
     return (
         <form
             onSubmit={submitForm}
-            className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 sm:px-16"
-        >
+            className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 sm:px-16">
             {type === "register" ? (
                 <div>
                     <label
                         htmlFor="fullName"
-                        className="block text-xs text-gray-600 uppercase"
-                    >
+                        className="block text-xs text-gray-600 uppercase">
                         {TEXTS.fields.name}
                     </label>
                     <input
@@ -59,8 +61,7 @@ export const AuthForm = ({type}: { type: "login" | "register" }) => {
             <div>
                 <label
                     htmlFor="email"
-                    className="block text-xs text-gray-600 uppercase"
-                >
+                    className="block text-xs text-gray-600 uppercase">
                     {TEXTS.fields.email}
                 </label>
                 <input
@@ -76,8 +77,7 @@ export const AuthForm = ({type}: { type: "login" | "register" }) => {
             <div>
                 <label
                     htmlFor="password"
-                    className="block text-xs text-gray-600 uppercase"
-                >
+                    className="block text-xs text-gray-600 uppercase">
                     {TEXTS.fields.password}
                 </label>
                 <input
@@ -94,7 +94,9 @@ export const AuthForm = ({type}: { type: "login" | "register" }) => {
             {type === "login" ? (
                 <p className="text-center text-sm text-gray-600">
                     {TEXTS.noAccount}
-                    <Link href={REGISTER_URL} className="font-semibold text-gray-800 pl-1">
+                    <Link
+                        href={REGISTER_URL}
+                        className="font-semibold text-gray-800 pl-1">
                         {TEXTS.signUp}
                     </Link>{" "}
                     {TEXTS.forFree}
@@ -102,7 +104,9 @@ export const AuthForm = ({type}: { type: "login" | "register" }) => {
             ) : (
                 <p className="text-center text-sm text-gray-600">
                     {TEXTS.alreadyHaveAccount}
-                    <Link href={LOGIN_URL} className="font-semibold text-gray-800 pl-1">
+                    <Link
+                        href={LOGIN_URL}
+                        className="font-semibold text-gray-800 pl-1">
                         {TEXTS.signIn}
                     </Link>{" "}
                     {TEXTS.instead}

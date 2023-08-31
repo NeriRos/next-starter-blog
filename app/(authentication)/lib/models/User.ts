@@ -1,19 +1,17 @@
-import "server-only";
-import {compare, hash} from "bcrypt"
-import {User as NextUser} from "next-auth"
-import {IUser} from "@/app/(authentication)/lib/interfaces/IUser";
+import "server-only"
+import { compare, hash } from "bcrypt"
+import { User as NextUser } from "next-auth"
+import { IUser } from "@/app/(authentication)/lib/interfaces/IUser"
 
 export class User implements NextUser, IUser {
-
     constructor(
         public id: string,
         public name: string,
         public email: string,
         private _password?: string,
         public created_at?: Date,
-        public updated_at?: Date,
-    ) {
-    }
+        public updated_at?: Date
+    ) {}
 
     static hashPassword(password: string): Promise<string> {
         return hash(password, 10)
@@ -26,7 +24,7 @@ export class User implements NextUser, IUser {
             json.email,
             json.password,
             json.created_at,
-            json.updated_at,
+            json.updated_at
         )
     }
 
@@ -35,8 +33,7 @@ export class User implements NextUser, IUser {
     }
 
     comparePassword(password: string): Promise<boolean> {
-        if (this._password === undefined)
-            return Promise.resolve(false)
+        if (this._password === undefined) return Promise.resolve(false)
 
         return compare(password, this._password)
     }
