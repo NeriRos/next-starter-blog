@@ -4,6 +4,7 @@ import React from "react"
 import axios from "axios"
 import { SessionProvider } from "next-auth/react"
 import { Session } from "next-auth"
+import { UserProvider } from "@/app/(authentication)/context/UserProvider"
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL
 
@@ -18,7 +19,7 @@ export const Providers = ({ children, session }: ProvidersProps) => {
     return (
         <SessionProvider session={session}>
             <QueryClientProvider client={queryClient}>
-                {children}
+                <UserProvider>{children}</UserProvider>
             </QueryClientProvider>
         </SessionProvider>
     )
