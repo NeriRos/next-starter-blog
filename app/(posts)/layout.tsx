@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import React from "react"
 import { METADATA } from "@/app/(posts)/consts"
 import { Header } from "@/components/Layout"
+import { UserProvider } from "@/app/(authentication)/context/UserProvider"
 
 export const metadata: Metadata = {
     title: METADATA.title,
@@ -20,9 +21,9 @@ export default async function Layout({
     children: React.ReactNode
 }) {
     return (
-        <>
+        <UserProvider>
             <Header />
             {children}
-        </>
+        </UserProvider>
     )
 }
