@@ -1,10 +1,10 @@
 import "@/styles/globals.css"
-import { Metadata } from "next"
-import { Inter } from "next/font/google"
-import { Toaster } from "react-hot-toast"
-import React, { Suspense } from "react"
-import AuthStatus from "@/app/(authentication)/components/AuthStatus"
-import { METADATA } from "@/app/consts"
+import {Metadata} from "next"
+import {Inter} from "next/font/google"
+import {Toaster} from "react-hot-toast"
+import React, {Suspense} from "react"
+import {METADATA} from "@/app/consts"
+import {AuthButtonsContainer} from "@/app/(authentication)/components/AuthButtons";
 
 const inter = Inter({
     variable: "--font-inter",
@@ -23,21 +23,23 @@ export const metadata: Metadata = {
     metadataBase: new URL(METADATA.base),
     themeColor: METADATA.themeColor,
 }
-
 export default async function RootLayout({
                                              children,
                                          }: {
     children: React.ReactNode;
 }) {
+
     return (
         <html lang="en">
         <body className={inter.variable}
               suppressHydrationWarning={true}>
-        <Toaster />
-        <Suspense fallback="Loading...">
-            <AuthStatus />
-        </Suspense>
-        {children}
+        <Toaster/>
+        <Providers>
+            <Suspense fallback="Loading...">
+                <AuthButtonsContainer/>
+            </Suspense>
+            {children}
+        </Providers>
         </body>
         </html>
     )

@@ -6,3 +6,9 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+/aws.xml
+/kubernetes-settings.xml
+/modules.xml
+/next-starter-blog.iml
+/inspectionProfiles/Project_Default.xml
+/vcs.xml
