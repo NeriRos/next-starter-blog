@@ -23,6 +23,8 @@ export async function POST(req: Request) {
             )
         }
 
+        console.error(e)
+
         return NextResponse.json({ error: "Unhandled error" }, { status: 500 })
     }
 }
