@@ -9,6 +9,7 @@ import {
     RegisterArgs,
 } from "@/app/(authentication)/lib/types/AuthenticationTypes"
 import { UserAlreadyExists } from "@/app/(authentication)/lib/errors/UserAlreadyExists"
+import { USER_ROLES } from "@/app/(authentication)/lib/models/UserRole"
 
 export type AuthenticationServiceDependencies = {
     dbRepository: UsersDbRepository
@@ -46,8 +47,13 @@ export const createAuthenticationService = (
         if (user) {
             throw new UserAlreadyExists()
         } else {
+            let newUser = User.fromJson(credentials)
+
+            if (process.env.ADMIN_EMAILS?.indexOf(credentials.email) !== -1)
+                newUser.role = USER_ROLES.admin
+
             return dependencies.dbRepository.createUser(
-                User.fromJson(credentials),
+                User.fromJson(newUser),
                 credentials
             )
         }
