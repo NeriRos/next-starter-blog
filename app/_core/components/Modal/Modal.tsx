@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactNode } from "react"
+import { ReactNode, useEffect } from "react"
 import { CgClose } from "react-icons/cg"
 
 export const Modal = (props: {
@@ -10,6 +10,20 @@ export const Modal = (props: {
     style?: any
     preventCloseOnOutsideClick?: boolean
 }) => {
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                handleOnClose()
+            }
+        }
+
+        window.addEventListener("keydown", handleKeyDown)
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown)
+        }
+    }, [])
+
     const handleOnClose = () => {
         props.onClose?.()
     }
