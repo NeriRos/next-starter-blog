@@ -1,10 +1,13 @@
-import "server-only";
-import {compare, hash} from "bcrypt"
-import {User as NextUser} from "next-auth"
-import {IUser} from "@/app/(authentication)/lib/interfaces/IUser";
+import "server-only"
+import { compare, hash } from "bcrypt"
+import { User as NextUser } from "next-auth"
+import { IUser } from "@/app/(authentication)/lib/interfaces/IUser"
+import {
+    USER_ROLES,
+    UserRole,
+} from "@/app/(authentication)/lib/models/UserRole"
 
 export class User implements NextUser, IUser {
-
     constructor(
         public id: string,
         public name: string,
@@ -12,7 +15,9 @@ export class User implements NextUser, IUser {
         private _password?: string,
         public created_at?: Date,
         public updated_at?: Date,
+        public role?: UserRole
     ) {
+        this.role = role ?? USER_ROLES.guest
     }
 
     static hashPassword(password: string): Promise<string> {
@@ -27,6 +32,7 @@ export class User implements NextUser, IUser {
             json.password,
             json.created_at,
             json.updated_at,
+            json.role
         )
     }
 
@@ -35,8 +41,7 @@ export class User implements NextUser, IUser {
     }
 
     comparePassword(password: string): Promise<boolean> {
-        if (this._password === undefined)
-            return Promise.resolve(false)
+        if (this._password === undefined) return Promise.resolve(false)
 
         return compare(password, this._password)
     }
@@ -48,6 +53,7 @@ export class User implements NextUser, IUser {
             email: this.email,
             created_at: this.created_at,
             updated_at: this.updated_at,
+            role: this.role,
         }
     }
 }

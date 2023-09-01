@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
-import {TEXTS} from "@/app/(marketing)/consts"
-import {LOGIN_REDIRECT_URL} from "@/app/(authentication)/components/AuthForm/consts";
+import { TEXTS } from "@/app/(marketing)/consts"
+import { LOGIN_REDIRECT_URL } from "@/app/(authentication)/components/AuthForm/consts"
 
 export default function Page() {
     return (
@@ -24,8 +24,7 @@ export default function Page() {
                             href="https://nextjs.org/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-stone-400 underline hover:text-stone-200 transition-all"
-                        >
+                            className="text-stone-400 underline hover:text-stone-200 transition-all">
                             Next.js
                         </a>{" "}
                         starter kit that uses{" "}
@@ -33,8 +32,7 @@ export default function Page() {
                             href="https://next-auth.js.org/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-stone-400 underline hover:text-stone-200 transition-all"
-                        >
+                            className="text-stone-400 underline hover:text-stone-200 transition-all">
                             Next-Auth
                         </a>{" "}
                         for simple email + password login and a{" "}
@@ -42,8 +40,7 @@ export default function Page() {
                             href="https://vercel.com/postgres"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-stone-400 underline hover:text-stone-200 transition-all"
-                        >
+                            className="text-stone-400 underline hover:text-stone-200 transition-all">
                             Vercel Postgres
                         </a>{" "}
                         database to persist the data.
@@ -53,8 +50,7 @@ export default function Page() {
                     <Link
                         href={LOGIN_REDIRECT_URL}
                         prefetch={false}
-                        className="text-stone-400 underline hover:text-stone-200 transition-all"
-                    >
+                        className="text-stone-400 underline hover:text-stone-200 transition-all">
                         Feed Page (Protected)
                     </Link>
                 </div>

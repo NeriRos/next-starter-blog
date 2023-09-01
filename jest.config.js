@@ -16,9 +16,14 @@ module.exports = async () => {
 
     // Custom `moduleNameMapper` configuration
     const moduleNameMapper = {
-        ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: "<rootDir>/" }),
+        ...pathsToModuleNameMapper(compilerOptions.paths, {
+            prefix: "<rootDir>/",
+        }),
         ...jestConfig.moduleNameMapper,
     }
-    
-    return { ...jestConfig, moduleNameMapper }
+
+    return {
+        ...jestConfig,
+        moduleNameMapper,
+    }
 }
