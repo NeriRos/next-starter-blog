@@ -34,9 +34,7 @@ export const createPostsService = (
     }
 
     const createPost = async (post: Post): Promise<Post> => {
-        const createdPost = await dependencies.dbRepository.create(
-            post.toJson()
-        )
+        const createdPost = await dependencies.dbRepository.create(post)
 
         return Post.fromJson(createdPost)
     }

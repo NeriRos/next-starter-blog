@@ -2,7 +2,9 @@ import { Metadata } from "next"
 import React from "react"
 import { METADATA } from "@/app/(posts)/consts"
 import { Header } from "@/components/Layout"
+import { CreatePostButton } from "@/app/(posts)/components/CreatePostButton"
 import { UserProvider } from "@/app/(authentication)/context/UserProvider"
+import { PostsFloatingQuickActions } from "@/app/(posts)/components/PostsFloatingQuickActions"
 
 export const metadata: Metadata = {
     title: METADATA.title,
@@ -24,6 +26,9 @@ export default async function Layout({
         <UserProvider>
             <Header />
             {children}
+            <PostsFloatingQuickActions>
+                <CreatePostButton />
+            </PostsFloatingQuickActions>
         </UserProvider>
     )
 }

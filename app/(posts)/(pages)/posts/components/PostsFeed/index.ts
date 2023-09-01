@@ -1,1 +1,1 @@
-export * from "./PostsFeedContainer"
+export * from "./PostsFeed"

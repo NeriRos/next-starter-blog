@@ -4,7 +4,7 @@ import Styles from "./PostsSearch.module.css"
 import { Post } from "@/app/(posts)/lib/models/Post"
 import { TEXTS } from "@/app/(posts)/(pages)/posts/components/PostsSearch/texts"
 import { usePostsSearch } from "@/app/(posts)/(pages)/posts/components/PostsSearch/usePostsSearch"
-import React, { ReactNode } from "react"
+import React, { ReactNode, useEffect } from "react"
 
 export const PostsSearch = (props: {
     posts: Post[]
@@ -12,9 +12,12 @@ export const PostsSearch = (props: {
     render?: (posts: Post[]) => ReactNode | ReactNode[]
 }) => {
     const { filteredPosts, searchPosts, searchText } = usePostsSearch(
-        props.posts,
-        props.onPostsFilter
+        props.posts
     )
+
+    useEffect(() => {
+        props?.onPostsFilter?.(filteredPosts)
+    }, [filteredPosts, props])
 
     return (
         <>

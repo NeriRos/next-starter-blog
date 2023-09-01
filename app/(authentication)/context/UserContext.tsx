@@ -15,3 +15,13 @@ export const useUser = () => {
 
     return user
 }
+
+export const useUserRole = () => {
+    const { isUser, isGuest, isAdmin } = useContext(UserContext)
+
+    return {
+        isUser,
+        isGuest,
+        isAdmin,
+    }
+}
