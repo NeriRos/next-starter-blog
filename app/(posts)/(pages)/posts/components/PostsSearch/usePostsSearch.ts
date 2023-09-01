@@ -1,23 +1,23 @@
-import { useEffect, useRef, useState } from "react"
-import { useSearch } from "@/app/_core/hooks/useSearch"
+import { useEffect, useState } from "react"
 import { Post } from "@/app/(posts)/lib/models/Post"
 
-export const usePostsSearch = (
-    posts: Post[],
-    onPostsFilter?: (posts: Post[]) => void
-) => {
+export const usePostsSearch = (posts: Post[]) => {
     const [searchText, setSearchText] = useState<string>("")
-    const filteredPosts = useSearch<Post>(posts, searchText, (post: Post) => {
-        return [post.title, post.content].join(" ")
-    })
-    const filteredPostsCount = useRef<number>(posts.length)
+
+    const [filteredPosts, setFilteredPosts] = useState<Post[]>(posts)
 
     useEffect(() => {
-        if (filteredPosts.length !== filteredPostsCount.current) {
-            onPostsFilter?.(filteredPosts)
-            filteredPostsCount.current = filteredPosts.length
-        }
-    }, [filteredPosts])
+        if (searchText === "") return setFilteredPosts(posts)
+
+        const newPosts = posts.filter((post) => {
+            return (
+                post.title.toLowerCase().includes(searchText.toLowerCase()) ||
+                post.content.toLowerCase().includes(searchText.toLowerCase())
+            )
+        })
+
+        setFilteredPosts(newPosts)
+    }, [posts, searchText])
 
     const searchPosts = (searchText: string) => {
         setSearchText(searchText)

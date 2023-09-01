@@ -8,7 +8,7 @@ import { useEffect, useState } from "react"
 export const usePostsFeed = (initialPosts: Post[] = []) => {
     const { error, data, isLoading } = useQuery({
         queryKey: [`posts`],
-        queryFn: () => getAllPosts(),
+        queryFn: getAllPosts,
         initialData: initialPosts,
     })
 
@@ -18,7 +18,7 @@ export const usePostsFeed = (initialPosts: Post[] = []) => {
         setFilteredPosts(data)
     }, [data])
 
-    const setPosts = (posts: Post[]) => {
+    const updatePosts = (posts: Post[]) => {
         setFilteredPosts(posts)
     }
 
@@ -26,7 +26,7 @@ export const usePostsFeed = (initialPosts: Post[] = []) => {
         error,
         posts: data,
         filteredPosts,
-        setPosts,
+        updatePosts,
         isLoading,
     }
 }
