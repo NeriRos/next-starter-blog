@@ -1,8 +1,8 @@
 export const USER_ROLES = {
-    admin: "admin",
-    user: "user",
-    guest: "guest",
-    banned: "banned",
+    admin: "ADMIN",
+    user: "USER",
+    guest: "GUEST",
+    banned: "BANNED",
 }
 
 export type UserRole = (typeof USER_ROLES)[keyof typeof USER_ROLES]

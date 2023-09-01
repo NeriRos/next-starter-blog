@@ -1,3 +1,5 @@
+import { UserRole } from "@/app/(authentication)/lib/models/UserRole"
+
 export interface IUser {
     id: string
     email: string
@@ -5,4 +7,5 @@ export interface IUser {
     password?: string
     created_at?: Date
     updated_at?: Date
+    role?: UserRole
 }
