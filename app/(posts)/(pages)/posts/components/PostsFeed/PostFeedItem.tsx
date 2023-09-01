@@ -3,7 +3,7 @@
 import { Post } from "@/app/(posts)/lib/models/Post"
 import { Card } from "@/components/Card"
 import { DeletePostButton } from "@/app/(posts)/components/DeletePostButton"
-import { EditPostButton } from "@/app/(posts)/components/EditPostButton"
+import { EditPostButtonWithModal } from "@/app/(posts)/components/EditPostButtonWithModal"
 
 export const PostFeedItem = ({ post }: { post: Post }) => {
     return (
@@ -16,7 +16,7 @@ export const PostFeedItem = ({ post }: { post: Post }) => {
                     key={"delete"}
                     postId={post.id}
                 />,
-                <EditPostButton
+                <EditPostButtonWithModal
                     key={"edit"}
                     post={post}
                 />,

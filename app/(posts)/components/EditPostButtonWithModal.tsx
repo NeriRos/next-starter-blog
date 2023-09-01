@@ -5,7 +5,7 @@ import { Post } from "@/app/(posts)/lib/models/Post"
 import { PostEditModal } from "@/app/(posts)/components/PostEditModal"
 import { useState } from "react"
 
-export const EditPostButton = (props: { post: Post }) => {
+export const EditPostButtonWithModal = (props: { post: Post }) => {
     const [isEditing, setIsEditing] = useState(false)
 
     return (
