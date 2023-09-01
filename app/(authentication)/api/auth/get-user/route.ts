@@ -1,24 +1,42 @@
 import { getServerSession } from "next-auth"
 import prisma from "@/lib/prisma"
+import { NextResponse } from "next/server"
 
-type ContextWithParams = {
-    params: {
-        email: string
-    }
-}
-export const GET = async (req: Request, ctx: ContextWithParams) => {
+export const GET = async (req: Request) => {
     const session = await getServerSession()
 
-    if (session && session.user?.email === ctx.params.email) {
-        const user = await prisma.user.findUnique({
-            where: {
-                email: session.user.email,
-            },
-        })
+    const url = new URL(req.url)
 
-        return {
-            status: 200,
-            body: user,
-        }
-    }
+    const email = url.searchParams.get("email")
+
+    if (!email)
+        return NextResponse.json(
+            {
+                error: "No email provided",
+            },
+            {
+                status: 400,
+            }
+        )
+
+    if (!session?.user?.email || session.user.email !== email)
+        return NextResponse.json(
+            {
+                error: "Invalid session",
+            },
+            {
+                status: 401,
+            }
+        )
+
+    const user = await prisma.user.findUnique({
+        where: {
+            email: session.user.email,
+        },
+    })
+
+    return NextResponse.json({
+        ...user,
+        password: undefined,
+    })
 }
