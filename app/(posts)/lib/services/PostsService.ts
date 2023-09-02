@@ -1,6 +1,6 @@
 import "server-only"
-import { Post } from "@/app/(posts)/lib/models/Post"
-import { PostsDbRepository } from "@/app/(posts)/lib/repositories/PostsDbRepository"
+import {Post} from "@/app/(posts)/lib/models/Post"
+import {postsDbRepository, PostsDbRepository} from "@/app/(posts)/lib/repositories/PostsDbRepository"
 
 export interface PostsService {
     getAllPosts(): Promise<Post[]>
@@ -60,3 +60,7 @@ export const createPostsService = (
         deletePost,
     }
 }
+
+export const postsService = createPostsService({
+    dbRepository: postsDbRepository,
+});
