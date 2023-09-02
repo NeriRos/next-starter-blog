@@ -9,7 +9,7 @@ type CreateCommentButtonProps = {
     post: IPost
 }
 
-export const CreateCommentButton = async (props: CreateCommentButtonProps) => {
+export const CreateCommentForm = async (props: CreateCommentButtonProps) => {
     async function createComment(formData: FormData) {
         "use server"
         const author = await authenticationService.getCurrentUser();
@@ -25,6 +25,8 @@ export const CreateCommentButton = async (props: CreateCommentButtonProps) => {
             authorId: Number(author.id),
             content,
         }
+
+        console.log(newComment)
 
         await commentsService.createComment(newComment)
     }
