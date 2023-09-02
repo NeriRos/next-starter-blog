@@ -10,8 +10,9 @@ export class Comment implements IComment {
     ) {
     }
 
-    public static fromJson(json: any): Comment {
+    public static fromJson(json: IComment): Comment {
         const {content, postId, authorId, id} = json;
+        if (!id) throw new Error("Comment must have an id");
         return new Comment(content, postId, authorId, id);
     }
 

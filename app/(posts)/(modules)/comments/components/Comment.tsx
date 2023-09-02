@@ -1,14 +1,12 @@
 import {IComment} from "@/app/(posts)/(modules)/comments/lib/interfaces/IComment";
-import {createUsersDbRepository} from "@/app/(authentication)/lib/repositories/UsersDbRepository";
+import {usersService} from "@/app/(authentication)/lib/services/UsersService";
 
 type CommentProps = {
     comment: IComment
 }
 
 export const Comment = async (props: CommentProps) => {
-    const repository = createUsersDbRepository();
-
-    const author = await repository.getUserById(props.comment.authorId);
+    const author = await usersService.getUserById(props.comment.authorId);
 
     if (!author) return null;
 

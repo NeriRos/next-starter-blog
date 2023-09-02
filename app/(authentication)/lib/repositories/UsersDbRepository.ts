@@ -61,3 +61,6 @@ export const createUsersDbRepository = (): UsersDbRepository => {
         createUser,
     }
 }
+
+export const usersDbRepository = createUsersDbRepository()
+
