@@ -26,30 +26,30 @@ export const createCommentsService = (
     dependencies: CommentsServiceDependencies
 ): CommentsService => {
     const getAllComments = async (): Promise<Comment[]> => {
-        const posts = await dependencies.dbRepository.getAll()
+        const comments = await dependencies.dbRepository.getAll()
 
-        return posts.map((post) => Comment.fromJson(post))
+        return comments.map((comment) => Comment.fromJson(comment))
     }
 
     const getComment = async (id: number): Promise<Comment | null> => {
-        const post = await dependencies.dbRepository.get(id)
+        const comment = await dependencies.dbRepository.get(id)
 
-        if (!post)
+        if (!comment)
             return null
 
-        return Comment.fromJson(post)
+        return Comment.fromJson(comment)
     }
 
-    const createComment = async (post: Comment): Promise<Comment> => {
-        const createdComment = await dependencies.dbRepository.create(post)
+    const createComment = async (comment: Comment): Promise<Comment> => {
+        const createdComment = await dependencies.dbRepository.create(comment)
 
         return Comment.fromJson(createdComment)
     }
 
-    const updateComment = async (id: number, post: Comment): Promise<Comment> => {
+    const updateComment = async (id: number, comment: Comment): Promise<Comment> => {
         const updatedComment = await dependencies.dbRepository.update(
             id,
-            post.toJson()
+            comment.toJson()
         )
 
         return Comment.fromJson(updatedComment)
