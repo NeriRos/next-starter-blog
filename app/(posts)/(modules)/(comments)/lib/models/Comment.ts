@@ -1,5 +1,5 @@
 import "server-only";
-import {IComment} from "@/app/(posts)/modules/Comments/lib/interfaces/IComment";
+import {IComment} from "@/app/(posts)/(modules)/(comments)/lib/interfaces/IComment";
 
 export class Comment implements IComment {
     constructor(
