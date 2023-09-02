@@ -5,11 +5,20 @@ import prisma from "@/lib/prisma"
 import {IComment} from "@/app/(posts)/(modules)/comments/lib/interfaces/IComment";
 
 export interface CommentsDbRepository extends CrudRepository<IComment> {
+    getAllForPost(postId: number): Promise<IComment[]>
 }
 
 export const createCommentsDbRepository = (): CommentsDbRepository => {
     const getAll = async (): Promise<IComment[]> => {
         return prisma.comment.findMany()
+    }
+
+    const getAllForPost = async (postId: number): Promise<IComment[]> => {
+        return prisma.comment.findMany({
+            where: {
+                postId,
+            },
+        })
     }
 
     const get = async (id: number): Promise<IComment | null> => {
@@ -39,6 +48,7 @@ export const createCommentsDbRepository = (): CommentsDbRepository => {
 
     return {
         getAll,
+        getAllForPost,
         get,
         create,
         update,

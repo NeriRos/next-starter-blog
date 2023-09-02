@@ -22,7 +22,7 @@ export const CreateCommentForm = async (props: CreateCommentButtonProps) => {
 
         const newComment: IComment = {
             postId: props.post.id,
-            authorId: Number(author.id),
+            userId: Number(author.id),
             content,
         }
 

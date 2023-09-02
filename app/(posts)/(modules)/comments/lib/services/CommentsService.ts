@@ -7,7 +7,7 @@ import {Comment} from "@/app/(posts)/(modules)/comments/lib/models/Comment";
 import {IComment} from "@/app/(posts)/(modules)/comments/lib/interfaces/IComment";
 
 export interface CommentsService {
-    getAllComments(): Promise<Comment[]>
+    getAllComments(postId: number): Promise<Comment[]>
 
     getComment(id: number): Promise<Comment | null>
 
@@ -25,8 +25,8 @@ export type CommentsServiceDependencies = {
 export const createCommentsService = (
     dependencies: CommentsServiceDependencies
 ): CommentsService => {
-    const getAllComments = async (): Promise<Comment[]> => {
-        const comments = await dependencies.dbRepository.getAll()
+    const getAllComments = async (postId: number): Promise<Comment[]> => {
+        const comments = await dependencies.dbRepository.getAllForPost(postId)
 
         return comments.map((comment) => Comment.fromJson(comment))
     }
@@ -40,7 +40,7 @@ export const createCommentsService = (
         return Comment.fromJson(comment)
     }
 
-    const createComment = async (comment: Comment): Promise<Comment> => {
+    const createComment = async (comment: IComment): Promise<Comment> => {
         const createdComment = await dependencies.dbRepository.create(comment)
 
         return Comment.fromJson(createdComment)

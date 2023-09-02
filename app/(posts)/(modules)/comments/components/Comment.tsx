@@ -6,7 +6,8 @@ type CommentProps = {
 }
 
 export const Comment = async (props: CommentProps) => {
-    const author = await usersService.getUserById(props.comment.authorId);
+    console.log(props.comment)
+    const author = await usersService.getUserById(props.comment.userId);
 
     if (!author) return null;
 
