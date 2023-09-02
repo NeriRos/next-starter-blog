@@ -1,4 +1,4 @@
-import {IComment} from "@/app/(posts)/(modules)/(comments)/lib/interfaces/IComment";
+import {IComment} from "@/app/(posts)/(modules)/comments/lib/interfaces/IComment";
 import {createUsersDbRepository} from "@/app/(authentication)/lib/repositories/UsersDbRepository";
 
 type CommentProps = {
