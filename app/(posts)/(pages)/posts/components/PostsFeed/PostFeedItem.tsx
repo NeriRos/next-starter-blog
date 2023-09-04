@@ -1,13 +1,19 @@
-"use client"
-
 import { Post } from "@/app/(posts)/lib/models/Post"
 import { Card } from "@/components/Card"
 import { DeletePostButton } from "@/app/(posts)/components/DeletePostButton"
 import { EditPostButtonWithModal } from "@/app/(posts)/components/EditPostButtonWithModal"
-import { useUserRole } from "@/app/(authentication)/context/UserContext"
+import { getServerSession } from "next-auth"
+import { usersService } from "@/app/(authentication)/lib/services/UsersService"
+import { USER_ROLES } from "@/app/(authentication)/lib/models/UserRole"
+import { PostComments } from "@/app/(posts)/(modules)/comments/components/PostComments"
+import { CreateCommentForm } from "@/app/(posts)/(modules)/comments/components/CreateCommentForm"
 
-export const PostFeedItem = ({ post }: { post: Post }) => {
-    const { isAdmin } = useUserRole()
+export const PostFeedItem = async ({ post }: { post: Post }) => {
+    const session = await getServerSession()
+
+    if (!session?.user) return null
+    const user = await usersService.getUserByEmail(session.user.email!)
+    if (!user) return null
 
     return (
         <Card
@@ -15,7 +21,7 @@ export const PostFeedItem = ({ post }: { post: Post }) => {
             title={post.title}
             description={post.content}
             actions={
-                isAdmin
+                user.role === USER_ROLES.admin
                     ? [
                           <DeletePostButton
                               key={"delete"}
@@ -23,11 +29,18 @@ export const PostFeedItem = ({ post }: { post: Post }) => {
                           />,
                           <EditPostButtonWithModal
                               key={"edit"}
-                              post={post}
+                              post={{
+                                  ...post,
+                              }}
                           />,
                       ]
                     : []
-            }
-        />
+            }>
+            <hr className="my-4" />
+            <div className="flex flex-col justify-center">
+                <CreateCommentForm post={post} />
+                <PostComments post={post} />
+            </div>
+        </Card>
     )
 }
