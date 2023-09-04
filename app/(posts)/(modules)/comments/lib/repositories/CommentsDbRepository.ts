@@ -1,8 +1,8 @@
 import "server-only"
 
-import {CrudRepository} from "@/lib/repositories/CrudRepository"
+import { CrudRepository } from "@/lib/repositories/CrudRepository"
 import prisma from "@/lib/prisma"
-import {IComment} from "@/app/(posts)/(modules)/comments/lib/interfaces/IComment";
+import { IComment } from "@/app/(posts)/(modules)/comments/lib/interfaces/IComment"
 
 export interface CommentsDbRepository extends CrudRepository<IComment> {
     getAllForPost(postId: number): Promise<IComment[]>
@@ -23,7 +23,7 @@ export const createCommentsDbRepository = (): CommentsDbRepository => {
 
     const get = async (id: number): Promise<IComment | null> => {
         return prisma.comment.findUnique({
-            where: {id},
+            where: { id },
         })
     }
 
@@ -35,14 +35,14 @@ export const createCommentsDbRepository = (): CommentsDbRepository => {
 
     const update = async (id: number, item: IComment): Promise<IComment> => {
         return prisma.comment.update({
-            where: {id},
+            where: { id },
             data: item,
         })
     }
 
     const deleteItem = async (id: number): Promise<void> => {
         await prisma.comment.delete({
-            where: {id},
+            where: { id },
         })
     }
 
