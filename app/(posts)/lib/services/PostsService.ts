@@ -12,7 +12,7 @@ export interface PostsService {
 
     createPost(post: Post): Promise<Post>
 
-    updatePost(id: number, post: Post): Promise<Post>
+    updatePost(id: number, post: Partial<Post>): Promise<Post>
 
     deletePost(id: number): Promise<void>
 }
@@ -45,7 +45,7 @@ export const createPostsService = (
     const updatePost = async (id: number, post: Post): Promise<Post> => {
         const updatedPost = await dependencies.dbRepository.update(
             id,
-            post.toJson()
+            JSON.parse(JSON.stringify(post))
         )
 
         return Post.fromJson(updatedPost)
