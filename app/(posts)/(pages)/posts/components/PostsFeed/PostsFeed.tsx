@@ -4,8 +4,6 @@ import { PostFeedItem } from "@/app/(posts)/(pages)/posts/components/PostsFeed/P
 import { postsService } from "@/app/(posts)/lib/services/PostsService"
 
 export const PostsFeed = async () => {
-    // const { posts, filteredPosts, updatePosts } = usePostsFeed()
-
     const posts = await postsService.getAllPosts()
 
     return (
