@@ -12,7 +12,7 @@ export const PostComments = async (props: CommentProps) => {
     const comments = await commentsService.getAllComments(props.post.id)
 
     return (
-        <div className="flex flex-col space-y-2">
+        <div className="flex flex-col space-y-2 gap-3">
             {comments.map((comment) => (
                 <Comment
                     comment={comment}

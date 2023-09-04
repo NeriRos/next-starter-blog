@@ -36,10 +36,10 @@ export const PostFeedItem = async ({ post }: { post: Post }) => {
                       ]
                     : []
             }>
-            <hr className="my-4" />
-            <div className="flex flex-col justify-center">
+            <hr className="mt-4" />
+            <PostComments post={post} />
+            <div className="flex flex-col justify-center mt-4">
                 <CreateCommentForm post={post} />
-                <PostComments post={post} />
             </div>
         </Card>
     )
