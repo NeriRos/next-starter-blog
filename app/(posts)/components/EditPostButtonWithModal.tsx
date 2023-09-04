@@ -1,11 +1,14 @@
 "use client"
 
 import { Button } from "@/components/Button"
-import { PostEditModal } from "@/app/(posts)/components/PostEditModal"
-import { useState } from "react"
+import { ReactNode, useState } from "react"
 import { IPost } from "@/app/(posts)/lib/interfaces/IPost"
+import { Modal } from "@/components/Modal/Modal"
 
-export const EditPostButtonWithModal = (props: { post: IPost }) => {
+export const EditPostButtonWithModal = (props: {
+    post: IPost
+    children: ReactNode
+}) => {
     const [isEditing, setIsEditing] = useState(false)
 
     return (
@@ -16,11 +19,12 @@ export const EditPostButtonWithModal = (props: { post: IPost }) => {
                 className={"text-3xl text-black"}>
                 Edit
             </Button>
-            <PostEditModal
-                post={props.post}
-                isEditing={isEditing}
-                onClose={() => setIsEditing(false)}
-            />
+
+            <Modal
+                isOpen={isEditing}
+                onClose={() => setIsEditing(false)}>
+                {props.children}
+            </Modal>
         </div>
     )
 }
