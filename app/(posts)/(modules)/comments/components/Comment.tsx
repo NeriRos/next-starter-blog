@@ -2,6 +2,7 @@ import { IComment } from "@/app/(posts)/(modules)/comments/lib/interfaces/IComme
 import { usersService } from "@/app/(authentication)/lib/services/UsersService"
 import { commentsService } from "@/app/(posts)/(modules)/comments/lib/services/CommentsService"
 import { BiExit } from "react-icons/bi"
+import { revalidatePath } from "next/cache"
 
 type CommentProps = {
     comment: IComment
@@ -15,12 +16,14 @@ export const Comment = async (props: CommentProps) => {
         "use server"
         if (!props.comment.id) return null
         await commentsService.deleteComment(props.comment.id)
+
+        revalidatePath("/posts")
     }
 
     if (!author) return null
 
     return (
-        <div className="bg-white p-4 rounded shadow-md w-3/4 mx-auto relative">
+        <div className="bg-white p-4 mt-4 rounded shadow-md w-3/4 mx-auto relative">
             <form action={deletePost}>
                 <button className="border-none bg-none">
                     <BiExit className="absolute top-1 right-1" />

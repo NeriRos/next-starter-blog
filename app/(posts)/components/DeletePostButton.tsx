@@ -1,10 +1,12 @@
 import { Button } from "@/components/Button"
-import axios from "axios"
+import { postsService } from "@/app/(posts)/lib/services/PostsService"
+import { revalidatePath } from "next/cache"
 
 export const DeletePostButton = (props: { postId: number }) => {
     const deletePost = async () => {
         "use server"
-        await axios.delete(`/posts/${props.postId}`)
+        await postsService.deletePost(props.postId)
+        revalidatePath("/posts")
     }
 
     return (
