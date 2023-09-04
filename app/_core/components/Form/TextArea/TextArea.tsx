@@ -5,14 +5,16 @@ import clsx from "clsx"
 
 export const TextArea = (props: {
     value?: string
+    defaultValue?: string
     name?: string
     placeholder?: string
-    className: string
+    className?: string
     onChange?: (value: string, event: ChangeEvent<HTMLTextAreaElement>) => void
     rows?: number
 }) => {
     return (
         <textarea
+            defaultValue={props.defaultValue}
             name={props.name}
             rows={props.rows || 3}
             className={clsx([

@@ -5,7 +5,8 @@ import clsx from "clsx"
 
 export const Input = (props: {
     value?: string
-    className: string
+    defaultValue?: string
+    className?: string
     name?: string
     onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void
     type?: string
@@ -18,6 +19,7 @@ export const Input = (props: {
 
     return (
         <input
+            defaultValue={props.defaultValue}
             name={props.name}
             type={props.type || "text"}
             className={clsx([
