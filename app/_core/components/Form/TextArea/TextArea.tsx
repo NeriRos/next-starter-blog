@@ -13,6 +13,7 @@ export const TextArea = (props: {
 }) => {
     return (
         <textarea
+            name={props.name}
             rows={props.rows || 3}
             className={clsx([
                 "border-2 border-gray-300 rounded-md p-2",

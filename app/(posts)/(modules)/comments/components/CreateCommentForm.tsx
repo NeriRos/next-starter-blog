@@ -4,9 +4,12 @@ import { IComment } from "@/app/(posts)/(modules)/comments/lib/interfaces/IComme
 import { IPost } from "@/app/(posts)/lib/interfaces/IPost"
 import { authenticationService } from "@/app/(authentication)/lib/services/AuthenticationService"
 import { TextArea } from "@/components/Form/TextArea"
+import { revalidatePath } from "next/cache"
+import clsx from "clsx"
 
 type CreateCommentButtonProps = {
     post: IPost
+    className?: string
 }
 
 export const CreateCommentForm = async (props: CreateCommentButtonProps) => {
@@ -17,6 +20,7 @@ export const CreateCommentForm = async (props: CreateCommentButtonProps) => {
 
         if (!author || !content || !props.post.id) {
             // TODO: show error
+            console.log("no content", author, content, props.post)
             return
         }
 
@@ -27,10 +31,12 @@ export const CreateCommentForm = async (props: CreateCommentButtonProps) => {
         }
 
         await commentsService.createComment(newComment)
+
+        revalidatePath("/posts")
     }
 
     return (
-        <div className="flex flex-col space-y-2">
+        <div className={clsx(["flex flex-col space-y-2", props.className])}>
             <form action={createComment}>
                 <TextArea
                     name="content"
@@ -40,7 +46,7 @@ export const CreateCommentForm = async (props: CreateCommentButtonProps) => {
                 <Button
                     type="ghost"
                     className={"text-3xl text-black"}>
-                    +
+                    Create comment
                 </Button>
             </form>
         </div>
