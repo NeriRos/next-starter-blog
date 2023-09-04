@@ -7,9 +7,10 @@ import { Post } from "@/app/(posts)/lib/models/Post"
 import { Modal } from "@/components/Modal/Modal"
 import { Input } from "@/components/Form/Input/Input"
 import { TextArea } from "@/components/Form/TextArea"
+import { IPost } from "@/app/(posts)/lib/interfaces/IPost"
 
 export const PostEditModal = (props: {
-    post: Post
+    post: IPost
     isEditing: boolean
     onClose: () => void
 }) => {
