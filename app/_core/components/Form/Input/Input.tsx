@@ -1,9 +1,11 @@
 "use client"
 
-import {ChangeEvent} from "react"
+import { ChangeEvent } from "react"
+import clsx from "clsx"
 
 export const Input = (props: {
     value?: string
+    className: string
     name?: string
     onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void
     type?: string
@@ -18,7 +20,10 @@ export const Input = (props: {
         <input
             name={props.name}
             type={props.type || "text"}
-            className={"border-2 border-gray-300 rounded-md p-2"}
+            className={clsx([
+                "border-2 border-gray-300 rounded-md p-2",
+                props.className,
+            ])}
             value={props.value}
             onChange={onChange}
         />
