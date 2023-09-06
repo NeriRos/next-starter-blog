@@ -19,15 +19,15 @@ model User {
 }
 
 model Post {
-  id       Int       @id @default(autoincrement())
-  title    String
-  content  String
+  id         Int       @id @default(autoincrement())
+  title      String
+  content    String
   metadata   Json?
   authorId   Int
-  author     User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  Comment  Comment[]
+  author     User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  Comment    Comment[]
   categoryId Int
-  category   Category @relation(fields: [categoryId], references: [id])
+  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 }
 
 model Comment {
