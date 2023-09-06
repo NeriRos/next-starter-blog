@@ -18,10 +18,18 @@ model User {
 }
 
 model Post {
-  id       Int    @id @default(autoincrement())
-  title    String
-  content  String
-  authorId Int
-  metadata Json?
-  author   User   @relation(fields: [authorId], references: [id])
+  id         Int      @id @default(autoincrement())
+  title      String
+  content    String
+  metadata   Json?
+  authorId   Int
+  author     User     @relation(fields: [authorId], references: [id])
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String
+  Post Post[]
 }
