@@ -24,7 +24,12 @@ export const createPostsDbRepository = (): PostsDbRepository => {
 
     const create = async (item: IPost): Promise<Post> => {
         const postResult = await prisma.post.create({
-            data: item,
+            data: {
+                content: item.content || "",
+                title: item.title || "",
+                categoryId: item.categoryId,
+                authorId: item.authorId,
+            },
         })
 
         return Post.fromJson(postResult)
