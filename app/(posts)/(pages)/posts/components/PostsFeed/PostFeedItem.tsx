@@ -8,6 +8,7 @@ import { USER_ROLES } from "@/app/(authentication)/lib/models/UserRole"
 import { PostComments } from "@/app/(posts)/(modules)/comments/components/PostComments"
 import { CreateCommentForm } from "@/app/(posts)/(modules)/comments/components/CreateCommentForm"
 import { PostEditForm } from "@/app/(posts)/components/PostEditForm"
+import { AssignPostToCategoryForm } from "@/app/(posts)/(modules)/categories/components/AssignPostToCategoryForm"
 
 export const PostFeedItem = async ({ post }: { post: Post }) => {
     const session = await getServerSession()
@@ -35,6 +36,10 @@ export const PostFeedItem = async ({ post }: { post: Post }) => {
                               }}>
                               <PostEditForm post={post} />
                           </EditPostButtonWithModal>,
+                          <AssignPostToCategoryForm
+                              key={"category"}
+                              post={post}
+                          />,
                       ]
                     : []
             }>
