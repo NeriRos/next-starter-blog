@@ -1,12 +1,13 @@
 import "server-only"
 
-import { User } from "@/app/(authentication)/lib/models/User"
+import {User} from "@/app/(authentication)/lib/models/User"
 import prisma from "@/app/_core/lib/prisma"
-import { LoginCredentials } from "@/app/(authentication)/lib/types/AuthenticationTypes"
+import {LoginCredentials} from "@/app/(authentication)/lib/types/AuthenticationTypes"
 
 export interface UsersDbRepository {
     getUsers: () => Promise<User[]>
     getUserByEmail: (email: string) => Promise<User | null>
+    getUserById: (id: number) => Promise<User | null>
     createUser: (
         user: User,
         credentials: LoginCredentials
@@ -30,6 +31,16 @@ export const createUsersDbRepository = (): UsersDbRepository => {
         return user ? User.fromJson(user) : null
     }
 
+    const getUserById = async (id: number) => {
+        const user = await prisma.user.findUnique({
+            where: {
+                id,
+            },
+        })
+
+        return user ? User.fromJson(user) : null
+    }
+
     const createUser = async (user: User, credentials: LoginCredentials) => {
         const password = await User.hashPassword(credentials.password)
 
@@ -44,8 +55,12 @@ export const createUsersDbRepository = (): UsersDbRepository => {
     }
 
     return {
+        getUserById,
         getUsers,
         getUserByEmail,
         createUser,
     }
 }
+
+export const usersDbRepository = createUsersDbRepository()
+

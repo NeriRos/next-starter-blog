@@ -9,23 +9,34 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
+  id       Int       @id @default(autoincrement())
   name     String
-  email    String @unique
+  email    String    @unique
   password String
   Post     Post[]
-  role     String @default("GUEST")
+  role     String    @default("GUEST")
+  Comment  Comment[]
 }
 
 model Post {
-  id         Int      @id @default(autoincrement())
-  title      String
-  content    String
+  id       Int       @id @default(autoincrement())
+  title    String
+  content  String
   metadata   Json?
   authorId   Int
-  author     User     @relation(fields: [authorId], references: [id])
+  author     User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  Comment  Comment[]
   categoryId Int
   category   Category @relation(fields: [categoryId], references: [id])
+}
+
+model Comment {
+  id      Int    @id @default(autoincrement())
+  content String
+  postId  Int
+  post    Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId  Int
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Category {
