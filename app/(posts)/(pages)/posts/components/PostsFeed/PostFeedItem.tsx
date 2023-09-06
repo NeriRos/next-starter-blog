@@ -6,7 +6,7 @@ import { usersService } from "@/app/(authentication)/lib/services/UsersService"
 import { USER_ROLES } from "@/app/(authentication)/lib/models/UserRole"
 import { PostComments } from "@/app/(posts)/(modules)/comments/components/PostComments"
 import { CreateCommentForm } from "@/app/(posts)/(modules)/comments/components/CreateCommentForm"
-import { PostEditForm } from "@/app/(posts)/components/PostEditForm"
+import { PostCreateOrEditForm } from "@/app/(posts)/components/PostCreateOrEditForm"
 import { categoriesService } from "@/app/(posts)/(modules)/categories/lib/services/CategoriesService"
 import { ModalWithButton } from "@/components/Modal"
 
@@ -34,7 +34,7 @@ export const PostFeedItem = async ({ post }: { post: Post }) => {
                           <ModalWithButton
                               key={"edit"}
                               buttonText={"Edit"}>
-                              <PostEditForm post={post} />
+                              <PostCreateOrEditForm post={post} />
                           </ModalWithButton>,
                       ]
                     : []
