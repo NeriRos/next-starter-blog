@@ -11,7 +11,7 @@ export const PostsFeed = async () => {
             {posts.map((post: Post) => (
                 <PostFeedItem
                     key={post.id}
-                    post={post}
+                    post={post.toJson()}
                 />
             ))}
         </div>
