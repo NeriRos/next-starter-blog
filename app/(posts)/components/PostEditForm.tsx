@@ -6,7 +6,7 @@ import { postsService } from "@/app/(posts)/lib/services/PostsService"
 import { revalidatePath } from "next/cache"
 import { ICategory } from "@/app/(posts)/(modules)/categories/lib/interfaces/ICategory"
 import { categoriesService } from "@/app/(posts)/(modules)/categories/lib/services/CategoriesService"
-import { Select } from "@/components/Select/Select"
+import { Select } from "@/components/Form/Select"
 
 export const PostEditForm = async (props: { post: IPost }) => {
     const categories = await categoriesService.getAllCategories()

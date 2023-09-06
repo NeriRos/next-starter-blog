@@ -1,7 +1,6 @@
 import { Post } from "@/app/(posts)/lib/models/Post"
 import { Card } from "@/components/Card"
 import { DeletePostButton } from "@/app/(posts)/components/DeletePostButton"
-import { EditPostButtonWithModal } from "@/app/(posts)/components/EditPostButtonWithModal"
 import { getServerSession } from "next-auth"
 import { usersService } from "@/app/(authentication)/lib/services/UsersService"
 import { USER_ROLES } from "@/app/(authentication)/lib/models/UserRole"
@@ -9,6 +8,7 @@ import { PostComments } from "@/app/(posts)/(modules)/comments/components/PostCo
 import { CreateCommentForm } from "@/app/(posts)/(modules)/comments/components/CreateCommentForm"
 import { PostEditForm } from "@/app/(posts)/components/PostEditForm"
 import { categoriesService } from "@/app/(posts)/(modules)/categories/lib/services/CategoriesService"
+import { ModalWithButton } from "@/components/Modal"
 
 export const PostFeedItem = async ({ post }: { post: Post }) => {
     const session = await getServerSession()
@@ -31,13 +31,11 @@ export const PostFeedItem = async ({ post }: { post: Post }) => {
                               key={"delete"}
                               postId={post.id}
                           />,
-                          <EditPostButtonWithModal
+                          <ModalWithButton
                               key={"edit"}
-                              post={{
-                                  ...post,
-                              }}>
+                              buttonText={"Edit"}>
                               <PostEditForm post={post} />
-                          </EditPostButtonWithModal>,
+                          </ModalWithButton>,
                       ]
                     : []
             }>
