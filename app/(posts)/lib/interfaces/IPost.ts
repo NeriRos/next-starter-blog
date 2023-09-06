@@ -2,6 +2,6 @@ export interface IPost {
     title: string
     content: string
     authorId: number
-    categoryId?: string
+    categoryId?: number
     id: number
 }

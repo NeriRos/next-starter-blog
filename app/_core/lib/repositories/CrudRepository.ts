@@ -7,7 +7,7 @@ export interface CrudRepository<T> {
 
     create(item: T): Promise<T>
 
-    update(id: number, item: T): Promise<T>
+    update(id: number, item: Partial<T>): Promise<T>
 
     deleteItem(id: number): Promise<void>
 }

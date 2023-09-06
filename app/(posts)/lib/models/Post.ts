@@ -6,7 +6,7 @@ export class Post implements IPost {
         public title: string,
         public content: string,
         public authorId: number,
-        public categoryId: string,
+        public categoryId: number,
         public id: number
     ) {}
 
