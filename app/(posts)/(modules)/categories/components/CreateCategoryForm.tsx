@@ -32,7 +32,7 @@ export const CreateCategoryForm = async (props: CreateCategoryButtonProps) => {
     return (
         <form
             action={createCategory}
-            className={clsx(["flex flex-col space-y-2", props.className])}>
+            className={clsx(["flex flex-col space-y-2 p-4", props.className])}>
             <Input
                 name="name"
                 className="w-full"
