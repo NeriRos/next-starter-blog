@@ -10,6 +10,7 @@ export const Input = (props: {
     name?: string
     onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void
     type?: string
+    placeholder?: string
 }) => {
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
         if (props.onChange) {
@@ -19,6 +20,7 @@ export const Input = (props: {
 
     return (
         <input
+            placeholder={props.placeholder}
             defaultValue={props.defaultValue}
             name={props.name}
             type={props.type || "text"}
