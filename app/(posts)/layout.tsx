@@ -5,6 +5,7 @@ import { Header } from "@/components/Layout"
 import { CreatePostButton } from "@/app/(posts)/components/CreatePostButton"
 import { UserProvider } from "@/app/(authentication)/context/UserProvider"
 import { PostsFloatingQuickActions } from "@/app/(posts)/components/PostsFloatingQuickActions"
+import { CreateCategoryForm } from "@/app/(posts)/(modules)/categories/components/CreateCategoryForm"
 
 export const metadata: Metadata = {
     title: METADATA.title,
@@ -28,6 +29,7 @@ export default async function Layout({
             {children}
             <PostsFloatingQuickActions>
                 <CreatePostButton />
+                <CreateCategoryForm />
             </PostsFloatingQuickActions>
         </UserProvider>
     )
