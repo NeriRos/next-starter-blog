@@ -26,6 +26,10 @@ export const Input = (props: {
             type={props.type || "text"}
             className={clsx([
                 "border-2 border-gray-300 rounded-md p-2",
+                "focus:outline-none",
+                "focus:ring-2",
+                "focus:ring-blue-400",
+                "focus:border-transparent",
                 props.className,
             ])}
             value={props.value}

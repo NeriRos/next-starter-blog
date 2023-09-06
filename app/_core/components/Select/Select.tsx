@@ -30,6 +30,7 @@ export const Select = (props: {
                     "focus:ring-2",
                     "focus:ring-blue-400",
                     "focus:border-transparent",
+                    "p-2",
                 ])}>
                 {props.options.map((option) => (
                     <option
