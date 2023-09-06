@@ -8,7 +8,7 @@ import { USER_ROLES } from "@/app/(authentication)/lib/models/UserRole"
 import { PostComments } from "@/app/(posts)/(modules)/comments/components/PostComments"
 import { CreateCommentForm } from "@/app/(posts)/(modules)/comments/components/CreateCommentForm"
 import { PostEditForm } from "@/app/(posts)/components/PostEditForm"
-import { AssignPostToCategoryForm } from "@/app/(posts)/(modules)/categories/components/AssignPostToCategoryForm"
+import { categoriesService } from "@/app/(posts)/(modules)/categories/lib/services/CategoriesService"
 
 export const PostFeedItem = async ({ post }: { post: Post }) => {
     const session = await getServerSession()
@@ -16,6 +16,8 @@ export const PostFeedItem = async ({ post }: { post: Post }) => {
     if (!session?.user) return null
     const user = await usersService.getUserByEmail(session.user.email!)
     if (!user) return null
+
+    const category = await categoriesService.getCategory(post.categoryId)
 
     return (
         <Card
@@ -36,13 +38,10 @@ export const PostFeedItem = async ({ post }: { post: Post }) => {
                               }}>
                               <PostEditForm post={post} />
                           </EditPostButtonWithModal>,
-                          <AssignPostToCategoryForm
-                              key={"category"}
-                              post={post}
-                          />,
                       ]
                     : []
             }>
+            <span className="absolute top-4 right-4">{category?.name}</span>
             <hr className="mt-4" />
             <PostComments post={post} />
             <div className="flex flex-col justify-center mt-4">
