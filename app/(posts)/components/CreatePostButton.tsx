@@ -22,11 +22,10 @@ export const CreatePostButton = async () => {
     return (
         <div className="flex flex-col space-y-2">
             <form action={createPost}>
-                <select></select>
                 <Button
                     type="ghost"
                     className={"text-3xl text-black"}>
-                    +
+                    Create Post
                 </Button>
             </form>
         </div>
