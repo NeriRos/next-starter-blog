@@ -1,15 +1,13 @@
 import "server-only"
 
-import { UsersDbRepository } from "@/app/(authentication)/lib/repositories/UsersDbRepository"
-import { NoUserFoundError } from "@/app/(authentication)/lib/errors/NoUserFoundError"
-import { PasswordsDontMatch } from "@/app/(authentication)/lib/errors/PasswordsDontMatch"
-import { User } from "@/app/(authentication)/lib/models/User"
-import {
-    LoginCredentials,
-    RegisterArgs,
-} from "@/app/(authentication)/lib/types/AuthenticationTypes"
-import { UserAlreadyExists } from "@/app/(authentication)/lib/errors/UserAlreadyExists"
-import { USER_ROLES } from "@/app/(authentication)/lib/models/UserRole"
+import {usersDbRepository, UsersDbRepository} from "@/app/(authentication)/lib/repositories/UsersDbRepository"
+import {NoUserFoundError} from "@/app/(authentication)/lib/errors/NoUserFoundError"
+import {PasswordsDontMatch} from "@/app/(authentication)/lib/errors/PasswordsDontMatch"
+import {User} from "@/app/(authentication)/lib/models/User"
+import {LoginCredentials, RegisterArgs,} from "@/app/(authentication)/lib/types/AuthenticationTypes"
+import {UserAlreadyExists} from "@/app/(authentication)/lib/errors/UserAlreadyExists"
+import {USER_ROLES} from "@/app/(authentication)/lib/models/UserRole"
+import {getServerSession} from "next-auth";
 
 export type AuthenticationServiceDependencies = {
     dbRepository: UsersDbRepository
@@ -18,13 +16,14 @@ export type AuthenticationServiceDependencies = {
 export interface AuthenticationService {
     authenticate: (credentials: LoginCredentials) => Promise<User>
     register: (user: RegisterArgs) => Promise<User | null>
+    getCurrentUser: () => Promise<User | null>
 }
 
 export const createAuthenticationService = (
     dependencies: AuthenticationServiceDependencies
 ): AuthenticationService => {
     const authenticate = async (credentials: LoginCredentials) => {
-        const { email, password } = credentials
+        const {email, password} = credentials
         const user = await dependencies.dbRepository.getUserByEmail(email)
 
         if (!user) {
@@ -59,8 +58,23 @@ export const createAuthenticationService = (
         }
     }
 
+    const getCurrentUser = async () => {
+        const session = await getServerSession()
+        if (!session?.user?.email) return null
+
+        return await dependencies.dbRepository.getUserByEmail(
+            session.user.email
+        )
+    }
+
     return {
         authenticate,
         register,
+
+        getCurrentUser
     }
 }
+
+export const authenticationService = createAuthenticationService({
+    dbRepository: usersDbRepository
+});

@@ -53,3 +53,5 @@ export const createPostsDbRepository = (): PostsDbRepository => {
         deleteItem,
     }
 }
+
+export const postsDbRepository = createPostsDbRepository()
