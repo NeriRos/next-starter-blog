@@ -36,7 +36,7 @@ export const Select = (props: {
                     <option
                         key={option.value}
                         value={option.value}>
-                        {option.label} - {option.value}
+                        {option.label}
                     </option>
                 ))}
             </select>
