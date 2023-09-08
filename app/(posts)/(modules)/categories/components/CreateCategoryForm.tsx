@@ -4,12 +4,15 @@ import { revalidatePath } from "next/cache"
 import clsx from "clsx"
 import { Input } from "@/components/Form/Input"
 import { categoriesService } from "@/app/(posts)/(modules)/categories/lib/services/CategoriesService"
+import { CategoryItem } from "@/app/(posts)/(modules)/categories/components/CategoryItem"
 
 type CreateCategoryButtonProps = {
     className?: string
 }
 
 export const CreateCategoryForm = async (props: CreateCategoryButtonProps) => {
+    const categories = await categoriesService.getAllCategories()
+
     async function createCategory(formData: FormData) {
         "use server"
         const name = formData.get("name") as string
@@ -43,6 +46,14 @@ export const CreateCategoryForm = async (props: CreateCategoryButtonProps) => {
                 className={"text-3xl text-black"}>
                 Create Category
             </Button>
+            <div className={"flex gap-2"}>
+                {categories.map((category, index) => (
+                    <CategoryItem
+                        key={category.id}
+                        category={category}
+                    />
+                ))}
+            </div>
         </form>
     )
 }
