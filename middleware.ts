@@ -13,7 +13,6 @@ export default withAuth({
     callbacks: {
         authorized: ({ req, token }) => {
             const path = new URL(req.url).pathname
-            console.log("PATH", path, "TOKEN", token)
 
             switch (path) {
                 case "/management":
