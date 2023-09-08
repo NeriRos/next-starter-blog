@@ -1,9 +1,11 @@
-import { UsersDbRepository } from "@/auth/lib/repositories/UsersDbRepository"
-import { NoUserFoundError } from "@/auth/lib/errors/NoUserFoundError"
-import { PasswordsDontMatch } from "@/auth/lib/errors/PasswordsDontMatch"
-import { User } from "@/auth/lib/models/User"
-import { LoginCredentials, RegisterArgs } from "@/auth/lib/types/AuthenticationTypes"
-import { UserAlreadyExists } from "@/auth/lib/errors/UserAlreadyExists"
+import "server-only";
+
+import {UsersDbRepository} from "@/app/(authentication)/lib/repositories/UsersDbRepository"
+import {NoUserFoundError} from "@/app/(authentication)/lib/errors/NoUserFoundError"
+import {PasswordsDontMatch} from "@/app/(authentication)/lib/errors/PasswordsDontMatch"
+import {User} from "@/app/(authentication)/lib/models/User"
+import {LoginCredentials, RegisterArgs} from "@/app/(authentication)/lib/types/AuthenticationTypes"
+import {UserAlreadyExists} from "@/app/(authentication)/lib/errors/UserAlreadyExists"
 
 export type AuthenticationServiceDependencies = {
     dbRepository: UsersDbRepository;
@@ -16,7 +18,7 @@ export interface AuthenticationService {
 
 export const createAuthenticationService = (dependencies: AuthenticationServiceDependencies): AuthenticationService => {
     const authenticate = async (credentials: LoginCredentials) => {
-        const { email, password } = credentials
+        const {email, password} = credentials
         const user = await dependencies.dbRepository.getUserByEmail(email)
 
         if (!user) {
