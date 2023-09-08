@@ -19,6 +19,10 @@ export const TextArea = (props: {
             rows={props.rows || 3}
             className={clsx([
                 "border-2 border-gray-300 rounded-md p-2",
+                "focus:outline-none",
+                "focus:ring-2",
+                "focus:ring-blue-400",
+                "focus:border-transparent",
                 props.className,
             ])}
             placeholder={props.placeholder}

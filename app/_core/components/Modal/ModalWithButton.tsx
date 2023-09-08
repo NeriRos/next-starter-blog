@@ -2,27 +2,26 @@
 
 import { Button } from "@/components/Button"
 import { ReactNode, useState } from "react"
-import { IPost } from "@/app/(posts)/lib/interfaces/IPost"
 import { Modal } from "@/components/Modal/Modal"
 
-export const EditPostButtonWithModal = (props: {
-    post: IPost
+export const ModalWithButton = (props: {
     children: ReactNode
+    buttonText: string
 }) => {
-    const [isEditing, setIsEditing] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
         <div>
             <Button
-                onClick={() => setIsEditing(true)}
+                onClick={() => setIsOpen(true)}
                 type="ghost"
                 className={"text-3xl text-black"}>
-                Edit
+                {props.buttonText}
             </Button>
 
             <Modal
-                isOpen={isEditing}
-                onClose={() => setIsEditing(false)}>
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}>
                 {props.children}
             </Modal>
         </div>

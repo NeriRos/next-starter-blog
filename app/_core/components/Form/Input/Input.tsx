@@ -10,6 +10,7 @@ export const Input = (props: {
     name?: string
     onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void
     type?: string
+    placeholder?: string
 }) => {
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
         if (props.onChange) {
@@ -19,11 +20,16 @@ export const Input = (props: {
 
     return (
         <input
+            placeholder={props.placeholder}
             defaultValue={props.defaultValue}
             name={props.name}
             type={props.type || "text"}
             className={clsx([
                 "border-2 border-gray-300 rounded-md p-2",
+                "focus:outline-none",
+                "focus:ring-2",
+                "focus:ring-blue-400",
+                "focus:border-transparent",
                 props.className,
             ])}
             value={props.value}

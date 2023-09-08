@@ -9,7 +9,6 @@ type CommentProps = {
 }
 
 export const Comment = async (props: CommentProps) => {
-    console.log(props.comment)
     const author = await usersService.getUserById(props.comment.userId)
 
     const deletePost = async () => {

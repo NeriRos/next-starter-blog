@@ -12,9 +12,11 @@ export const Card = (props: {
 }) => {
     return (
         <div className={clsx([Styles.card, props.style, props.className])}>
-            {props.title ? <h3>{props.title}</h3> : null}
-            {props.description ? <p>{props.description}</p> : null}
-            {props.children}
+            <div>
+                {props.title ? <h3>{props.title}</h3> : null}
+                {props.description ? <p>{props.description}</p> : null}
+            </div>
+            <div>{props.children}</div>
             {props.actions ? (
                 <div className={Styles.actions}>{props.actions}</div>
             ) : null}
